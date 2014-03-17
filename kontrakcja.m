@@ -15,12 +15,14 @@ function [zakres, przyb_min] = kontrakcja(hfuncZmLambda, z, beta, N)
         disp(S);
         return;
     end
-    dlugoscZ = abs(z(1)-z(2));
+    dlugoscZ = z(2)-z(1);
     for i = 1:1:N
-        z_i = z0 + beta^i * dlugoscZ;
-        if hfuncZmLambda(z_i) < Q0
+        z_i = z(1) + beta^i * dlugoscZ;
+        Q_i = hfuncZmLambda(z_i);
+        if Q_i < Q0
             zakres = [z(1), z0 + beta^(i-1) * dlugoscZ];
             przyb_min = z_i;
+            disp('haha');
             return;
         end
     end
